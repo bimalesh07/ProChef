@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Searchview from "./components/Searchview";
+import CategorySelcted from "./components/CategorySelcted";
+import Cuisine from "./components/Cuisine";
+import Homeview from "./components/Homeview";
+import RecepiesSlider from "./components/RecepiesSlider";
+import RecipeCard from "./components/RecipeCard";
+import RecipeDeatilsview from "./components/RecipeDeatilsview";
+import Treanding from "./components/Treanding";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="min-h-screen bg-gray-950 font-sans text-gray-100">
+        {/* Navbar is outside Routes */}
+        <Navbar />
+        <Cuisine/>
+        <Routes>
+          <Route path="/" element={<Homeview />} />
+          <Route path="/search" element={<Searchview />} />
+          <Route path="/category" element={<CategorySelcted />} />
+          <Route path="/cuisine" element={<Cuisine />} />
+          <Route path="/recipe/:id" element={<RecipeDeatilsview />} />
+          {/* Add more routes as needed */}
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
