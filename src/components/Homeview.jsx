@@ -4,7 +4,7 @@ import Treanding from './Treanding'
 import CategorySelcted from './CategorySelcted'
 import { API_URL } from './useFech'
 
-const Homeview = () => {
+const Homeview = ({ filterByCategory }) => {
   return (
     <>
       <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -17,11 +17,13 @@ const Homeview = () => {
           title="Treanding..."
           fetchUrl={`${API_URL}filter.php?a=Canadian`}
         />
-
-        <CategorySelcted />
+        <CategorySelcted
+          title="Quick Filter By Primary Ingredient"
+          filterByCategory={filterByCategory}
+        />
       </main>
     </>
   );
-}
+};
 
 export default Homeview

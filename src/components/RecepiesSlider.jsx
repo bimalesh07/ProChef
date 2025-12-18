@@ -3,6 +3,7 @@ import { useFetch } from "./useFech";
 import RecipeCard from "./RecipeCard";
 import Slider from "react-slick";
 import { Clock,Loader } from "lucide-react";
+
 const RecepiesSlider = ({ title, fetchUrl }) => {
   const { data, loading, error } = useFetch(fetchUrl);
 
@@ -19,7 +20,7 @@ const RecepiesSlider = ({ title, fetchUrl }) => {
     autoplaySpeed: 600,
     cssEase: "linear",
   };
-if (loading) return(
+ if (loading) return(
   <div className="text-center p-8 text-gray-300">
     <Loader className=" animate-spin inline-block mr-2 text-blue-400"/>
     Loading{title}...

@@ -1,9 +1,37 @@
-import React from 'react'
-
-const Searchview = () => {
+import React from "react";
+import RecipeCard from "./RecipeCard";
+import { Link } from "react-router-dom";
+import { ChevronLeft,Loader } from "lucide-react";
+const Searchview = ({ meals, loading }) => {
+  console.log("search=", meals);
   return (
-    <div>Searchview</div>
-  )
-}
+    <>
+      <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:xp-8 py-8">
+        <Link
+          to={"/"}
+          className="text-yellow-400 hover:text-yellow-300 flex items-center mb-6 font-medium transition text-lg group"
+        >
+          <ChevronLeft className="w-6 h-6 mr-1 transition" />
+          Back to Dashboard
+        </Link>
 
-export default Searchview
+        {loading && (
+          <div className="text-center p-8 text-gray-300">
+            <Loader className=" animate-spin inline-block mr-2 text-blue-400" />
+            Searching the database...
+          </div>
+        )}
+
+        {!loading && meals.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12">
+            {meals.map((meal, index) => (
+              <RecipeCard meal={meal} key={index} />
+            ))}
+          </div>
+        )}
+      </main>
+    </>
+  );
+};
+
+export default Searchview;

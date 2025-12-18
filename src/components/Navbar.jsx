@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { Frown, Search, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({handleSearch}) => {
+
+  const navigate = useNavigate();
   const [input, setinput] = useState("");
 
-  const handlesearch=(e)=>{
-    e.preventDefault()
-    console.log("searching")
-    setinput(" ")
-
-  }
+  const searchhandleSearch = (e) => {
+    e.preventDefault();
+    if (input.trim()) {
+      handleSearch(input.trim());
+      navigate(`search/${input}`);
+      setinput(" ");
+    }
+  };
 
   return (
     <>
@@ -25,11 +29,14 @@ const Navbar = () => {
               <span className="text-blue-400">Pro</span> Chef
             </Link>
 
-            <form onSubmit={handlesearch} className=" flex-1 max-w-lg mx-4 hidden sm:flex">
+            <form
+              onSubmit={searchhandleSearch}
+              className=" flex-1 max-w-lg mx-4 hidden sm:flex"
+            >
               <input
                 type="text"
                 value={input}
-                onChange={(e)=>setinput(e.target.value)}
+                onChange={(e) => setinput(e.target.value)}
                 placeholder="Search dishes, ingredienrs, or cuisine"
                 className="w-full px-5 py-2 border border-green-700 bg-gray-900 text-gray-50 rounded-l-full focus:outline-none focus:ring-4 focus:ring-blue-600/50 transition "
               ></input>

@@ -14,7 +14,6 @@ export const useFetch = (url) => {
       return;
     }
     const fetchData = async () => {
-
       try {
         setloading(true);
         setError(null);
